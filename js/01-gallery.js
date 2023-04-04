@@ -36,22 +36,34 @@ listImgEl.addEventListener('click', (event) => {
     // console.log(event.target)
 
     const dataSourseId = event.target.dataset.source
-    console.log(dataSourseId)
+    // console.log(dataSourseId)
 
     const instance = basicLightbox.create(`
         <div class="modal">
             <img
                 class="gallery__image"
                 src="${dataSourseId}"
-                data-source="${dataSourseId}"
+                data-source="${event.target.alt}"
                 
             />
         </div>
     `)
-
+   
     instance.show()
 
     const modalDiv = document.querySelector('.modal');
-    modalDiv.addEventListener('click', (event) => { instance.close() });
+
+    document.addEventListener("keydown", event => {
+        
+        if (event.code === 'Escape') {
+            instance.close()
+        };
+    });
+
+    modalDiv.addEventListener('click', (event) => instance.close()  );
 });
 
+// document.addEventListener("keydown", event => {
+//   console.log("key: ", event.key);
+//   console.log("code: ", event.code);
+// });
