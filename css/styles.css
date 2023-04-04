@@ -3,6 +3,11 @@
   --animation-duration: 250ms;
 }
 
+img{
+  display: block;
+  width: 100%;
+}
+
 .gallery {
   display: grid;
   max-width: 1140px;
