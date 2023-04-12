@@ -46,24 +46,28 @@ listImgEl.addEventListener('click', (event) => {
                 data-source="${event.target.alt}"
                 
             />
-        </div>
-    `)
+        </div>  `,
+        {
+            handler: null,
+            onShow(instance) {
+                this.handler = closeModal.bind(instance);
+                document.addEventListener('keydown', this.handler);
+            },
+            onClose () {document.removeEventListener('keydown', this.handler)}
+
+        }
+    )
    
+    function closeModal (event) {
+        if (event.code === 'Escape') {
+            this.close()
+        };
+    };
+
     instance.show()
 
     const modalDiv = document.querySelector('.modal');
-
-    document.addEventListener("keydown", event => {
-        
-        if (event.code === 'Escape') {
-            instance.close()
-        };
-    });
-
-    modalDiv.addEventListener('click', (event) => instance.close()  );
+    modalDiv.addEventListener('click', (event) => instance.close());
+    // document.removeEventListener('keydown', );
 });
 
-// document.addEventListener("keydown", event => {
-//   console.log("key: ", event.key);
-//   console.log("code: ", event.code);
-// });
